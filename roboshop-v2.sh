@@ -89,11 +89,10 @@ do
                         }
                     }
                 ]
-            }
-        '
-         echo "updated R53 record for: $instance"
+            .
+            echo "updated R53 record for: $instance"
         else
-          echo "roboshop-$instance already running:$INSTANCE_ID"    
+            echo "roboshop-$instance already running:$INSTANCE_ID"    
         fi
     fi
 done
