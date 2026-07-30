@@ -1,7 +1,7 @@
 #!/bin/bash
 
-AMI_ID= "ami-0220d79f3f480ecf5" 
-ZONE_ID= "Z01842473AEAVYOAVFX3C" #  replace with  your zone ID 
+AMI_ID="ami-0220d79f3f480ecf5" 
+ZONE_ID="Z01842473AEAVYOAVFX3C" #  replace with  your zone ID 
 DOMAIN_NAME="daws80s.space" # replace with your domain name
 R= "\e[31m"
 G= "\E[32m"
