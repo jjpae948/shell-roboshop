@@ -11,6 +11,15 @@ N="\e[0m"
 ### validation ###
 if [ $# -lt 2 ]; then
     echo -e "$R ERROR:: Atleast 2 Arguments required $N"
-    echo "USAGE: $0 [create/delete] [instance2...]"
+    echo "USAGE: $0 [create/delete] [instance1] [instance2...]"
     exit 1
 fi     
+
+ACTION=$1
+shift # first argument will be removed
+
+if [ $ACTION -ne "create" ] && [ $ACTION -ne "delete" ];then
+    echo -e "$R ERROR:: first argument must be either create or delete"
+    echo "USAGE: $0 [create/delete] [instance1] [instance2...]"
+    exit 1
+fi
