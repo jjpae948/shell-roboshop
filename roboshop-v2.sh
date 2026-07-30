@@ -29,11 +29,12 @@ get_instance_id(){
   aws ec2 describe-instances --filters "Name=tag:Name,Values=roboshop-$name" "Name=instance-state-name,Values=running" --query
   "Reservations[0].Instance[0].InstanceId" --output text
 }
+
 for instance in $@
 do
    INSTANCE_ID=$(get_instance_id $Instance)
    if [ $ACTION == "create" ]; then
-       if  [ $INSTANCE_ID: ==:: "None" ]; then
+       if [ $INSTANCE_ID == "None" ]; then
            echo "Launching instance: roboshop-$instance" 
            INSTANCE_ID=$(aws ec2 run-instances \
             --image-id $AMI_ID \
