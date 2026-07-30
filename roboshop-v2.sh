@@ -92,6 +92,7 @@ do
         '
          echo "updated R53 record for: $instance"
         else
+        
           echo "roboshop-$instance already running:$INSTANCE_ID"    
         fi
     fi
