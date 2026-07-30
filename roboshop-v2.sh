@@ -9,7 +9,7 @@ Y="\e[33m"
 N="\e[0m"
 
 ### validation ###
-if [ $# -1t 2 ]; then
+if [ $# -lt 2 ]; then
     echo -e "$R ERROR:: Atleast 2 Arguments required $N"
     echo "USAGE: $0 [create/delete] [instance2...]"
     exit1
