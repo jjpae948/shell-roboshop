@@ -12,5 +12,5 @@ N="\e[0m"
 if [ $# -lt 2 ]; then
     echo -e "$R ERROR:: Atleast 2 Arguments required $N"
     echo "USAGE: $0 [create/delete] [instance2...]"
-    exit1
+    exit 1
 fi     
