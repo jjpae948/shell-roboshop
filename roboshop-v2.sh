@@ -10,7 +10,7 @@ N= "\e[0m"
 
 ### validation ###
 if  [ $# -1t 2 ];then
-     echo -e $R ERROR:: Atleast 2 Arguments
-     echo "USAGE: $0 [create/delete] [instance2...]"
-     exit1
+    echo -e "$R ERROR:: Atleast 2 Arguments required $N"
+    echo "USAGE: $0 [create/delete] [instance2...]"
+    exit1
 fi     
