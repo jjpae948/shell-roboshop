@@ -3,7 +3,7 @@
 #export PATH=$PATH:/usr/local/bin
 
 AMI_ID="ami-0220d79f3f480ecf5"
-ZONE_ID="Z01842473AEAVYOAVFX3C" # replace with your zone ID
+ZONE_ID="Z07716123F2KYESC1V2RZ" # replace with your zone ID
 DOMAIN_NAME="daws80s.space" # replace with your domain name
 R="\e[31m"
 G="\e[32m"
@@ -26,7 +26,7 @@ if [ "$ACTION" != "create" ] && [ "$ACTION" != "delete" ]; then
     echo -e "$R ERROR:: First argument must be either create or delete $N"
     echo "USAGE: $0 [create/delete] [instance1] [instance2...] or [all]"
     exit 1
-    fi
+fi
 
 # If "all" is passed, expand to full list (reversed for delete)
 if [ "$1" == "all" ]; then
@@ -37,7 +37,7 @@ if [ "$1" == "all" ]; then
     fi
 else
     INSTANCES="$@"
-   fi
+fi
 
 get_instance_id(){
     name=$1
@@ -45,7 +45,7 @@ get_instance_id(){
 }
 
 for instance in $INSTANCES
- do
+do
     INSTANCE_ID=$(get_instance_id $instance)
     if [ $ACTION == "create" ]; then
         if [ $INSTANCE_ID == "None" ]; then
@@ -59,6 +59,7 @@ for instance in $INSTANCES
             --output text
             )
             echo "Launched Instance: $INSTANCE_ID"
+            echo "Instance is running: $INSTANCE_ID"
             sleep 2 #sometimes instance take some time to create
 
         else
@@ -70,7 +71,7 @@ for instance in $INSTANCES
             IP=$(aws ec2 describe-instances --instance-ids $INSTANCE_ID \
             --query 'Reservations[*].Instances[*].PublicIpAddress' \
             --output text
-                        )
+            )
             R53_RECORD="$DOMAIN_NAME"
         else
             IP=$(aws ec2 describe-instances --instance-ids $INSTANCE_ID \
@@ -79,12 +80,12 @@ for instance in $INSTANCES
             )
             R53_RECORD="$instance.$DOMAIN_NAME"
         fi
-        
+
         aws route53 change-resource-record-sets \
         --hosted-zone-id $ZONE_ID \
         --change-batch '
             {
-          "Comment": "Update A record to new IP",
+                "Comment": "Update A record to new IP",
                 "Changes": [
                     {
                         "Action": "UPSERT",
@@ -103,7 +104,7 @@ for instance in $INSTANCES
             }
         '
         echo "updated R53 record for: $instance"
-         else
+    else
         if [ $INSTANCE_ID == "None" ]; then
             echo "$instance already destroyed, nothing to do..."
         else
@@ -111,4 +112,4 @@ for instance in $INSTANCES
             echo "Terminating Instance: $instance"
         fi
     fi
-done   
+done         
