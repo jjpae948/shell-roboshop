@@ -59,7 +59,6 @@ do
             --output text
             )
             echo "Launched Instance: $INSTANCE_ID"
-            echo "Instance is running: $INSTANCE_ID"
             sleep 2 #sometimes instance take some time to create
 
         else
